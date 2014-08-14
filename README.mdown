@@ -1,3 +1,6 @@
+###See example folder for an example of usage.
+
+
 ##What is this?
 
 This program will help you organize, keep clean and easy to understand your "scripts\npc\" folder. What does this mean?
