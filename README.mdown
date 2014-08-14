@@ -26,7 +26,7 @@ In heroes I have 2 files: custom_tusk.txt and custom_sniper.txt
 
 custom_tusk.txt has inside this code 
 
-'''
+```
 
 "npc_dota_hero_tusk_tusk"
 {
@@ -47,11 +47,11 @@ custom_tusk.txt has inside this code
 	"AbilityLayout"		"3"
 }
 
-'''
+```
 
 custom_sniper.txt has inside this code
 
-'''
+```
 
 "npc_dota_hero_sniper_sniper"
 {
@@ -72,7 +72,7 @@ custom_sniper.txt has inside this code
 	"AbilityLayout"		"3"
 	}
 
-'''
+```
 
 Execute the program, press Start and hopefully you will get a success message.
 
@@ -81,7 +81,7 @@ Inside  "scripts\npc\" you will now find every npc_xxxx_custom.txt you requested
 
 For example since I have custom_tusk.txt and custom_sniper.txt inside my heroes folder I will find a npc_heroes_custom.txt file that inside has the following code:
 
-'''
+```
 
 //Generated using Dota Custom File Generator by cris9696
 "DOTAHeroes"
@@ -107,4 +107,4 @@ For example since I have custom_tusk.txt and custom_sniper.txt inside my heroes 
 	//End of file sniper_sniper.txt
 }
 
-'''
+```
