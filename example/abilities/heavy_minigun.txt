@@ -1,0 +1,92 @@
+"heavy_minigun"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"	 "ability_datadriven"
+		"AbilityTextureName" "minigun"
+		"precache"
+        {
+            "particle_folder"            "particles/units/heroes/hero_mirana/"
+        }
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		
+	    "OnToggleOn"
+	    {
+	        "ApplyModifier"
+	        {
+	        	"Target" 		"CASTER"
+	            "ModifierName" 	"minigun"
+	        }
+	    }
+	    "OnToggleOff"
+	    {
+	        "RemoveModifier"
+			{
+				"Target" 		"CASTER"
+				"ModifierName"	"minigun"
+			}
+	    }
+	    "Modifiers"
+	    {
+		    "minigun"
+		    {
+		        "ThinkInterval" "0.1"
+		        "OnIntervalThink"
+		        {
+		            "RunScript"
+					{
+						"Function"		"MakeForwardLinearProjectile"
+						"ScriptFile"	"scripts/vscripts/general.lua"
+						"EffectName"	"particles/units/heroes/hero_mirana/mirana_spell_arrow.vpcf"
+						"MoveSpeed"		"700"
+						"FixedDistance"	"2000"
+						"StartRadius"	"100"
+						"EndRadius"		"100"
+					}
+					"FireSound"
+					{
+						"EffectName"		"Tower.Fire.Attack"
+						"Target" 			"CASTER"
+					}
+		        }
+		    }
+	    }
+
+	    "OnProjectileHit"
+        {
+                "DeleteOnHit" "true"
+                "Damage"
+                {
+                        "Type"          "DAMAGE_TYPE_PHYSICAL"
+                        "Damage"        "10"
+                        "Target" 		"TARGET"
+                } 
+        }
+        "OnProjectileHitUnit"
+        {
+                "Damage"
+                {
+                        "Type"          "DAMAGE_TYPE_PHYSICAL"
+                        "MinDamage"     "8"
+                        "MaxDamage"		"14"
+                        "Target" 		"TARGET"
+                } 
+        }
+
+	}

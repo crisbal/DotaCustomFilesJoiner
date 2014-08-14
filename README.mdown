@@ -1,0 +1,104 @@
+##What is this?
+
+This program will help you organize, keep clean and easy to understand your "scripts\npc\" folder. What does this mean?
+
+If you are writing a custom game mode with a lot of items, abilities, heroes, units you will probably have huge, messy and long npc_abilites_custom.txt or npc_whatever_custom.txt files. In my opinion as a person and as a programmer having big source files is not good for you and for others, especially if lacking a proper editor / syntax highlight such as for custom dota files.
+
+With this program you can split your custom files in any number you want and once you run it, it will automatically generate the whole npc_xxxx_custom.txt file for you, ready to be used inside dota.
+
+For example you can have one file for each ability, one file for a category of items, one file for all the ultimates, one file for whatever you want (as long as it is dota-scripting related) and when you run the program you will find all these things joined in their big npc_xxxx_custom.txt file.
+
+##How to use
+
+Place the executable in the "\scripts\npc\" folder of your addon/gamemode, usaully located in "C:\Program Files\Steam\SteamApps\common\dota 2 beta\dota_ugc\game\dota_addons\addon_name\scripts\npc".
+
+Create a folder for each custom thing you want to make for your gamemode, for example if you want to make a gamemode with custom heroes, abilites and items you will create 3 folder named "heroes","abilites","items".
+
+The same goes if you already have a custom game mode.
+
+Accepted folders name are {"heroes","abilities","items","units"}
+
+In each of these folders place any file you like as long as they need to go together in the generated file. In "heroes" you will place your custom heroes split up in different files, in "items" you can have a file for every item and in "units" maybe a file for every category of unit, one file for houses, one for helpers etc.
+
+Practical Example:
+
+In heroes I have 2 files: custom_tusk.txt and custom_sniper.txt
+
+custom_tusk.txt has inside this code 
+
+'''
+"npc_dota_hero_tusk_tusk"
+{
+	"override_hero"				"npc_dota_hero_tusk"
+	
+
+	"AttackDamageMin"	"1"
+	"AttackDamageMax"	"1"
+
+	"AttributeStrengthGain"		"0"									
+	"AttributeIntelligenceGain"	"0"									
+	"AttributeAgilityGain"		"0"									
+
+	"Ability1"			"tusk1"		
+	"Ability2"			"tusk2"
+	"Ability3"			"tusk3"
+	"Ability4"			""
+	"AbilityLayout"		"3"
+}
+'''
+
+custom_sniper.txt has inside this code
+
+'''
+"npc_dota_hero_sniper_sniper"
+{
+	"override_hero"				"npc_dota_hero_sniper"
+	
+
+	"AttackDamageMin"	"1"
+	"AttackDamageMax"	"1"
+
+	"AttributeStrengthGain"		"0"									
+	"AttributeIntelligenceGain"	"0"									
+	"AttributeAgilityGain"		"0"									
+
+	"Ability1"			"sniper1"		
+	"Ability2"			"sniper2"
+	"Ability3"			"sniper3"
+	"Ability4"			""
+	"AbilityLayout"		"3"
+	}
+'''
+
+Execute the program, press Start and hopefully you will get a success message.
+
+
+Inside  "scripts\npc\" you will now find every npc_xxxx_custom.txt you requested
+
+For example since I have custom_tusk.txt and custom_sniper.txt inside my heroes folder I will find a npc_heroes_custom.txt file that inside has the following code:
+
+'''
+//Generated using Dota Custom File Generator by cris9696
+"DOTAHeroes"
+{
+
+
+	//Start of file heavy_tusk.txt
+	"npc_dota_hero_tusk_heavy"
+		{
+			"override_hero"				"npc_dota_hero_tusk"
+			//other stuff from the file that I cut out
+		}
+	//End of file heavy_tusk.txt
+
+
+	//Start of file sniper_sniper.txt
+	"npc_dota_hero_sniper_sniper"
+		{
+			"override_hero"				"npc_dota_hero_sniper"
+			
+			//other stuff from the file that I cut out
+		}
+	//End of file sniper_sniper.txt
+}
+'''

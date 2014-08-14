@@ -1,0 +1,57 @@
+"heavy_punch"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"	 "ability_datadriven"
+		"AbilityTextureName" "punch"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		 "OnToggleOn"
+	    {
+	        "ApplyModifier"
+	        {
+	        	"Target" 		"CASTER"
+	            "ModifierName" 	"punch"
+	        }
+	    }
+	    "OnToggleOff"
+	    {
+	        "RemoveModifier"
+			{
+				"Target" 		"CASTER"
+				"ModifierName"	"punch"
+			}
+	    }
+	    "Modifiers"
+	    {
+		    "punch"
+		    {
+		        "Properties"
+		        {
+		        	"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "25"
+		        	"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "-25"
+		        	"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"100"
+		        	"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"	"50"
+		        }
+
+		        "ThinkInterval" "0.5"
+		        "OnIntervalThink"
+		        {
+		            "RunScript"
+					{
+						"Function"		"AddLife"
+						"ScriptFile"	"scripts/vscripts/general.lua"
+						"HowMuch"		"-10"
+					}
+		        }
+		    }
+	    }
+	}

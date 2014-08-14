@@ -1,0 +1,48 @@
+//Generated using Dota Custom File Generator by cris9696
+"DOTAHeroes"
+{
+
+
+	//Start of file heavy_tusk.txt
+	"npd_dota_hero_tusk_heavy"
+		{
+			"override_hero"				"npc_dota_hero_tusk"
+			
+	
+			"AttackDamageMin"	"1"
+			"AttackDamageMax"	"1"
+	
+			"AttributeStrengthGain"		"0"									
+			"AttributeIntelligenceGain"	"0"									
+			"AttributeAgilityGain"		"0"									
+	
+			"Ability1"			"heavy_minigun"		
+			"Ability2"			"heavy_sandvich"
+			"Ability3"			"heavy_punch"
+			"Ability4"			""
+			"AbilityLayout"		"3"
+		}
+	//End of file heavy_tusk.txt
+
+
+	//Start of file sniper_sniper.txt
+	"npd_dota_hero_sniper_sniper"
+		{
+			"override_hero"				"npc_dota_hero_sniper"
+			
+	
+			"AttackDamageMin"	"1"
+			"AttackDamageMax"	"1"
+	
+			"AttributeStrengthGain"		"0"									
+			"AttributeIntelligenceGain"	"0"									
+			"AttributeAgilityGain"		"0"									
+	
+			"Ability1"			"sniper_rifle"		
+			"Ability2"			"sniper_machinegun"
+			"Ability3"			"sniper_jarate"
+			"Ability4"			""
+			"AbilityLayout"		"3"
+		}
+	//End of file sniper_sniper.txt
+}

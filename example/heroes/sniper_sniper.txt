@@ -1,0 +1,18 @@
+"npd_dota_hero_sniper_sniper"
+	{
+		"override_hero"				"npc_dota_hero_sniper"
+		
+
+		"AttackDamageMin"	"1"
+		"AttackDamageMax"	"1"
+
+		"AttributeStrengthGain"		"0"									
+		"AttributeIntelligenceGain"	"0"									
+		"AttributeAgilityGain"		"0"									
+
+		"Ability1"			"sniper_rifle"		
+		"Ability2"			"sniper_machinegun"
+		"Ability3"			"sniper_jarate"
+		"Ability4"			""
+		"AbilityLayout"		"3"
+	}
