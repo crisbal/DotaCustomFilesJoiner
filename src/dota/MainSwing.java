@@ -35,7 +35,7 @@ public class MainSwing extends JFrame
 		
 		JPanel main = new JPanel();
 		main.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		main.setLayout(new GridLayout(5,2,10,10));
+		main.setLayout(new GridLayout(Main.folders.length+1,2,10,10));
 		
 		for(int i=0;i<Main.folders.length;i++){
 			main.add(new JLabel(Main.folders[i] + " folder"));

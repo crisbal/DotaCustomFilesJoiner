@@ -11,9 +11,9 @@ public class Main
 {
 	public static final String PROGRAM_NAME = "Dota Custom File Generator";
 	
-	public static String[] folders = {"heroes","abilities","items","units"};
-	public static String[] keys = {"DOTAHeroes","DOTAAbilities","DOTAAbilities","DOTAUnits"};
-	public static String[] files = {"npc_heroes_custom.txt","npc_abilities_custom.txt","npc_items_custom.txt","npc_units_custom.txt"};
+	public static String[] folders = {"heroes","abilities","items","units","addon_english"};
+	public static String[] keys = {"DOTAHeroes","DOTAAbilities","DOTAAbilities","DOTAUnits","lang"};
+	public static String[] files = {"npc_heroes_custom.txt","npc_abilities_custom.txt","npc_items_custom.txt","npc_units_custom.txt","addon_english.txt "};
 	
 	public static void main(String[] args){
 		System.out.println("Starting program");
