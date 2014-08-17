@@ -18,6 +18,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -33,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,7 +47,9 @@ public class MainNewInterface extends JFrame
 	private JTextField txtConfigName;
 	private JTextField txtOutputFile;
 	private JTextField txtInputFolderPath;
-
+	
+	private JLabel lblHowManyFiles
+	;
 	private JTextArea txtaPreview, txtaStartFile, txtaEndFile;
 
 	private JCheckBox checkAutoJoin;
@@ -84,14 +88,14 @@ public class MainNewInterface extends JFrame
 	 */
 	public MainNewInterface()
 	{
-
+		configs = new ArrayList<Config>();
 		loadFromFile();
-
-		fillListWithDummyData();
-
+		
 		initInterface();
 
 		initList();
+		
+		
 	}
 
 	private void saveToFile()
@@ -127,13 +131,14 @@ public class MainNewInterface extends JFrame
 				try
 				{
 					Config c = (Config) file.readObject();
-					configs.add(c);
+					if(c != null)
+						configs.add(c);
 				} catch (EOFException e)
 				{
 					break;
 				} catch (Exception e)
 				{
-					JOptionPane.showMessageDialog(null, "IO ERROR ON SAVE:\n" + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "IO ERROR ON LOAD:\n" + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 					System.exit(-1);
 				}
 			}
@@ -278,6 +283,8 @@ public class MainNewInterface extends JFrame
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 				{
 					txtInputFolderPath.setText(chooser.getSelectedFile().toString());
+					
+					updateFileCount(chooser.getSelectedFile().toString());
 				}
 			}
 		});
@@ -296,6 +303,8 @@ public class MainNewInterface extends JFrame
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 				{
 					txtOutputFile.setText(chooser.getSelectedFile().toString());
+					
+					
 				}
 			}
 		});
@@ -307,39 +316,43 @@ public class MainNewInterface extends JFrame
 		panel.add(lblPreviewOfThe);
 
 		txtaPreview = new JTextArea();
+		JScrollPane spPreview = new JScrollPane(txtaPreview); 
 		txtaPreview.setEditable(false);
-		txtaPreview.setBounds(305, 33, 288, 426);
-		txtaPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
+		spPreview.setBounds(305, 33, 288, 426);
+		spPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtaPreview.setTabSize(2);
-		panel.add(txtaPreview);
+		panel.add(spPreview);
 
 		JLabel lblStartOfGenerated = new JLabel("Start of generated file");
 		lblStartOfGenerated.setBounds(10, 144, 250, 14);
 		panel.add(lblStartOfGenerated);
-
+		
+		
 		txtaStartFile = new JTextArea();
-		txtaStartFile.setBounds(10, 159, 285, 79);
-		txtaStartFile.setBorder(new LineBorder(new Color(0, 0, 0)));
+		JScrollPane spStart = new JScrollPane(txtaStartFile); 
+		spStart.setBounds(10, 159, 285, 79);
+		spStart.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtaStartFile.setTabSize(2);
 		txtaStartFile.getDocument().addDocumentListener(new OnChangeTextArea());
-		panel.add(txtaStartFile);
+		panel.add(spStart);
 
 		JLabel lblEndGeneratedFile = new JLabel("End of generated file");
 		lblEndGeneratedFile.setBounds(10, 294, 250, 14);
 		panel.add(lblEndGeneratedFile);
 
 		txtaEndFile = new JTextArea();
-		txtaEndFile.setBorder(new LineBorder(new Color(0, 0, 0)));
-		txtaEndFile.setBounds(10, 310, 285, 79);
+		JScrollPane spEnd = new JScrollPane(txtaEndFile); 
+		spEnd.setBorder(new LineBorder(new Color(0, 0, 0)));
+		spEnd.setBounds(10, 310, 285, 79);
 		txtaEndFile.setTabSize(2);
 		txtaEndFile.getDocument().addDocumentListener(new OnChangeTextArea());
-		panel.add(txtaEndFile);
+		panel.add(spEnd);
 
 		checkAutoJoin = new JCheckBox("Automatic Join on file change");
 		checkAutoJoin.setBounds(10, 411, 276, 23);
 		panel.add(checkAutoJoin);
 
-		JButton btnApplyJoin = new JButton("Save / Join this config");
+		JButton btnApplyJoin = new JButton("Save this config & Join Files");
 		btnApplyJoin.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -355,6 +368,8 @@ public class MainNewInterface extends JFrame
 					configs.get(index).inputFolderPath = txtInputFolderPath.getText();
 					configs.get(index).outputFile = txtOutputFile.getText();
 					configs.get(index).changeChecker = checkAutoJoin.isSelected();
+					
+					updateFileCount(txtInputFolderPath.getText());
 
 					saveToFile();
 				} else
@@ -366,7 +381,7 @@ public class MainNewInterface extends JFrame
 		btnApplyJoin.setBounds(10, 470, 285, 34);
 		panel.add(btnApplyJoin);
 
-		JLabel lblHowManyFiles = new JLabel("%d files found in %s folder");
+		lblHowManyFiles = new JLabel("%d files found in %s folder");
 		lblHowManyFiles.setToolTipText("Click to refresh");
 		lblHowManyFiles.setBounds(10, 83, 285, 14);
 		panel.add(lblHowManyFiles);
@@ -428,6 +443,21 @@ public class MainNewInterface extends JFrame
 		});
 		btnDeleteCurrent.setBounds(10, 506, 150, 23);
 		contentPane.add(btnDeleteCurrent);
+	}
+
+	protected void updateFileCount(String folderPath)
+	{
+		File folder = new File(folderPath);
+		if (!folder.isDirectory())
+			JOptionPane.showMessageDialog(null, "No folder named '" + folder + "' found. '", "Error", JOptionPane.ERROR_MESSAGE);
+		else{
+			String[] folders = folderPath.split("\\");
+			
+			String folderName = folders[folders.length-1];
+			
+			lblHowManyFiles.setText(folder.listFiles().length + " found in " + folderName + " folder");
+		}
+		
 	}
 
 	private void resetForm()
