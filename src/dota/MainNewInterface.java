@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.Color;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -203,10 +204,36 @@ public class MainNewInterface extends JFrame
 		txtInputFolderPath.setColumns(10);
 
 		JButton btnChooseInputFolder = new JButton("...");
+		btnChooseInputFolder.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+				chooser.setDialogTitle("Choose the input folder");
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				chooser.setAcceptAllFileFilterUsed(false);
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+				{
+					txtInputFolderPath.setText(chooser.getSelectedFile().toString());
+				}
+			}
+		});
 		btnChooseInputFolder.setBounds(276, 55, 19, 19);
 		panel.add(btnChooseInputFolder);
 
 		JButton btnChooseOutputFile = new JButton("...");
+		btnChooseOutputFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+				chooser.setDialogTitle("Choose the output file");
+				chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				chooser.setAcceptAllFileFilterUsed(true);
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+				{
+					txtOutputFile.setText(chooser.getSelectedFile().toString());
+				}
+			}
+		});
 		btnChooseOutputFile.setBounds(276, 111, 19, 19);
 		panel.add(btnChooseOutputFile);
 
