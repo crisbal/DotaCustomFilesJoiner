@@ -26,4 +26,6 @@ public class Config implements Serializable
 		this.endFile = endFile;
 		this.changeChecker = changeChecker;
 	}
+	
+	
 }

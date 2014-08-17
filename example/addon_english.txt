@@ -1,0 +1,105 @@
+//Generated using Dota Custom KVScript Files Merger by cris9696
+"lang"
+{
+	"Language"		"English"
+	"Tokens"
+	{
+
+
+	//Start of file addon_strings.txt
+	"addon_game_name"							"HOLDOUT EXAMPLE"
+	
+	"holdout_gold_col"							"GOLD COLLECTED"
+	"holdout_kills"								"KILLS"
+	"holdout_player"							"PLAYER"
+	"holdout_round_completed"					"ROUND COMPLETE"
+	"holdout_gold_expired"						"GOLD BAGS EXPIRED:"
+	"holdout_tower_bonus"						"TOWER GOLD BONUS"
+	"holdout_deaths"							"DEATHS"
+	"holdout_resurrects"						"RESURRECTS"
+	"holdout_team_gold_report"					"TEAM GOLD BAGS COLLECTED"
+	"holdout_defend_ancient"					"DEFEND YOUR KING"
+	"holdout_take_gold_bags"					"COLLECT GOLD BAGS FOR YOUR TEAM"
+	"holdout_resurrect_allies"					"RESURRECT FALLEN ALLIES"
+	"holdout_inspect_skills"					"HEROES AND ITEMS MAY BE DIFFERENT IN THIS GAME MODE"
+	"holdout_victory"							"VICTORY!"
+	"holdout_lose"								"THE RITUAL HAS BEEN DISRUPTED"
+	"holdout_points_earned"						"PHANTOM FRAGMENTS EARNED"
+	"holdout_gold_points_earned"				"SHINING FRAGMENTS EARNED"
+	"holdout_play_again"						"PLAY AGAIN?"
+	"holdout_next_difficulty"					"Restart at the next difficulty level?"
+	"holdout_fragments_earned_round"			"FRAGMENTS EARNED THIS ROUND"
+	"holdout_fragments_earned_session"			"TOTAL FRAGMENTS EARNED THIS SESSION"
+	"holdout_victory_message"					"YOU DEFEATED"
+	//End of file addon_strings.txt
+
+
+	//Start of file string_UI.txt
+	"DOTA_Tooltip_ability_item_bag_of_gold"							"Bag of Gold"
+	
+	"DOTA_Quest_Holdout_Round"					"Round %quest_round%"
+	"DOTA_Quest_Holdout_Round_Subtext"			"%quest_current_value% killed / %quest_target_value% total"
+	"DOTA_Quest_Holdout_PrepTime"				"Round %quest_round%%quest_extra_text% in %quest_current_value% seconds"
+	
+	"DOTA_Quest_Holdout_Prevent_Resurrection"	"Bonus (%quest_reward% Gold): Limit zombie resurrection"
+	"DOTA_Quest_Holdout_Prevent_Resurrection_Subtext"	"%quest_current_value% resurrection waves cast / %quest_target_value% allowed"
+	
+	"DOTA_Quest_TD_Ancient_Health"				"Altar Health"
+	"DOTA_Quest_TD_Ancient_Health_Subtext"		"%quest_current_value% / %quest_target_value%"
+	
+	"DOTA_Quest_Protect_The_Ancient"			"Protect the Altar"
+	"DOTA_Quest_Protect_The_Ancient_Subtext"	"Health: %quest_current_value% / %quest_target_value%"
+	
+	"DOTA_Chat_TowerKilledGood"					"A tower was destroyed!"
+	"holdout_instructions_title"				"Holdout Example Addon"
+	"holdout_instructions_body"					"Welcome to the holdout example game mode!"
+	//End of file string_UI.txt
+
+
+	//Start of file units_names.txt
+	// Unit Names
+	"npc_dota_creature_basic_zombie"			"Zombie"
+	"npc_dota_creature_basic_zombie_exploding"	"Volatile Zombie"
+	"npc_dota_creature_basic_zombie_bomb"		"Destroyer Zombie"
+	"npc_dota_creature_berserk_zombie"			"Summoned Berserker"
+	"npc_dota_creature_lesser_nightcrawler"		"Shadeshore Pouncer"
+	"npc_dota_creature_missile_launcher"		"Goblin M.Launcher"
+	"npc_dota_creature_rattletrap"				"Disassembler"
+	"npc_dota_creature_broodking"				"Broodqueen"
+	"npc_dota_creature_broodmother_egg"			"Egg"
+	"npc_dota_creature_broodmother"				"Broodmotherling"
+	"npc_dota_creature_spiderling"				"Spiderling"
+	"npc_dota_creature_corpselord"				"Corpse Lord"
+	"npc_dota_creature_slithereen"				"Slarbasher"
+	"npc_dota_creature_kobold_tunneler"			"Kobold"
+	"npc_dota_creature_gnoll_assassin"			"Gnoll"
+	"npc_dota_creature_troll_healer"			"Troll Healer"
+	"npc_dota_creature_mini_roshan"				"Flame Ancient"
+	"npc_dota_creature_tormented_soul"			"Shrack"
+	"npc_dota_splitter_a"						"Crumbling Golem"
+	"npc_dota_splitter_b"						"Golem Chunk"
+	"npc_dota_splitter_c"						"Golem Splinter"
+	"npc_dota_creature_ogre_melee"				"Ogre Grunt"
+	"npc_dota_creature_ogre_magi"				"Ogre Shaman"
+	"npc_dota_creature_ogre_tank"				"Ogre Commander"
+	"npc_dota_creature_boss_pudge"				"Pudge's Offspring"
+	"npc_dota_creature_king_treant"				"Aged Treant"
+	"npc_dota_creature_forest_prophet"			"Forest Prophet"
+	"npc_dota_creature_hellbear"				"Hell Bear"
+	"npc_dota_creature_small_spirit_bear"		"Small Spirit Bear"
+	"npc_dota_creature_large_spirit_bear"		"Large Spirit Bear"
+	"npc_dota_creature_bear_chieftain"			"Bear Chieftan"
+	"npc_dota_creature_big_bear"				"Enraged Bear"
+	"npc_dota_creature_ancient_apparition"		"Ice Apparition"
+	"npc_dota_creature_snow_creep_melee"		"Snow Satyr"
+	"npc_dota_creature_minor_lich"				"Minor Frost Lich"
+	"npc_dota_venomancer_scourge_ward_1"		"Scourge Ward"
+	"npc_dota_venomancer_scourge_ward_2"		"Scourge Ward"
+	"npc_dota_venomancer_scourge_ward_3"		"Scourge Ward"
+	"npc_dota_venomancer_scourge_ward_4"		"Scourge Ward"
+	"npc_dota_summoned_guardian_angel"			"Guardian Angel"
+	"npc_dota_creature_treant"					"Treant"
+	"npc_dota_creature_buff_witch"				"Empowering Wraith"
+	//End of file units_names.txt
+	}
+}

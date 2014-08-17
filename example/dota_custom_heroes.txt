@@ -1,5 +1,5 @@
-//Generated using Dota Custom File Generator by cris9696
-"DOTAHeroes"
+//Generated using Dota Custom KVScript Files Merger by cris9696
+"DotaSomething"
 {
 
 
