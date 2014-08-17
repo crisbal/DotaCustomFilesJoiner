@@ -1,6 +1,8 @@
 package dota;
 
-public class Config
+import java.io.Serializable;
+
+public class Config implements Serializable
 {
 	public String name, inputFolderPath, outputFile, startFile, endFile;
 	

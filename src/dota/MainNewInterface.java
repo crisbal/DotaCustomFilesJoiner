@@ -1,6 +1,5 @@
 package dota;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -18,7 +19,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
@@ -30,10 +30,17 @@ import javax.swing.JCheckBox;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class MainNewInterface extends JFrame
 {
-
 	private JPanel contentPane;
 	private JTextField txtConfigName;
 	private JTextField txtOutputFile;
@@ -62,6 +69,7 @@ public class MainNewInterface extends JFrame
 				{
 					MainNewInterface frame = new MainNewInterface();
 					frame.setVisible(true);
+
 				} catch (Exception e)
 				{
 					e.printStackTrace();
@@ -76,11 +84,65 @@ public class MainNewInterface extends JFrame
 	 */
 	public MainNewInterface()
 	{
+
+		loadFromFile();
+
 		fillListWithDummyData();
 
 		initInterface();
 
 		initList();
+	}
+
+	private void saveToFile()
+	{
+		try
+		{
+			FileOutputStream f = new FileOutputStream("config.bin");
+			ObjectOutputStream file = new ObjectOutputStream(f);
+
+			for (Config c : configs)
+			{
+				file.writeObject(c);
+			}
+			file.flush();
+			f.close();
+
+		} catch (IOException e)
+		{
+			JOptionPane.showMessageDialog(null, "IO ERROR ON SAVE:\n" + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+			System.exit(-1);
+		}
+	}
+
+	private void loadFromFile()
+	{
+		try
+		{
+			FileInputStream f = new FileInputStream("config.bin");
+			ObjectInputStream file = new ObjectInputStream(f);
+
+			while (true)
+			{
+				try
+				{
+					Config c = (Config) file.readObject();
+					configs.add(c);
+				} catch (EOFException e)
+				{
+					break;
+				} catch (Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "IO ERROR ON SAVE:\n" + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+					System.exit(-1);
+				}
+			}
+			f.close();
+		} catch (IOException e)
+		{
+			System.out.println("Configs File not found.");
+		}
+
 	}
 
 	private void initList()
@@ -128,16 +190,15 @@ public class MainNewInterface extends JFrame
 		}
 	}
 
-	private void generatePreview()
+	public void generatePreview()
 	{
-		Config selected = listConfig.getSelectedValue();
 
-		String preview = selected.startFile;
+		String preview = txtaStartFile.getText();
 
 		preview += "\n";
-		preview += "\t//Joined files content here";
+		preview += "\t//Joined files content starts here\n\t...\n\t//Joined files content ends here";
 		preview += "\n";
-		preview += selected.endFile;
+		preview += txtaEndFile.getText();
 
 		txtaPreview.setText(preview);
 
@@ -155,6 +216,8 @@ public class MainNewInterface extends JFrame
 
 	private void initInterface()
 	{
+		addWindowListener(new MyWindowListener());
+
 		setTitle("Dota Custom Files Joiner by cris9696");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -222,8 +285,10 @@ public class MainNewInterface extends JFrame
 		panel.add(btnChooseInputFolder);
 
 		JButton btnChooseOutputFile = new JButton("...");
-		btnChooseOutputFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnChooseOutputFile.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 				chooser.setDialogTitle("Choose the output file");
 				chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -256,6 +321,7 @@ public class MainNewInterface extends JFrame
 		txtaStartFile.setBounds(10, 159, 285, 79);
 		txtaStartFile.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtaStartFile.setTabSize(2);
+		txtaStartFile.getDocument().addDocumentListener(new OnChangeTextArea());
 		panel.add(txtaStartFile);
 
 		JLabel lblEndGeneratedFile = new JLabel("End of generated file");
@@ -266,6 +332,7 @@ public class MainNewInterface extends JFrame
 		txtaEndFile.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtaEndFile.setBounds(10, 310, 285, 79);
 		txtaEndFile.setTabSize(2);
+		txtaEndFile.getDocument().addDocumentListener(new OnChangeTextArea());
 		panel.add(txtaEndFile);
 
 		checkAutoJoin = new JCheckBox("Automatic Join on file change");
@@ -273,6 +340,29 @@ public class MainNewInterface extends JFrame
 		panel.add(checkAutoJoin);
 
 		JButton btnApplyJoin = new JButton("Save / Join this config");
+		btnApplyJoin.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				if (!listConfig.isSelectionEmpty())
+				{
+
+					int index = listConfig.getSelectedIndex();
+
+					configs.get(index).name = txtConfigName.getText();
+					configs.get(index).endFile = txtaEndFile.getText();
+					configs.get(index).startFile = txtaStartFile.getText();
+					configs.get(index).inputFolderPath = txtInputFolderPath.getText();
+					configs.get(index).outputFile = txtOutputFile.getText();
+					configs.get(index).changeChecker = checkAutoJoin.isSelected();
+
+					saveToFile();
+				} else
+				{
+					JOptionPane.showMessageDialog(null, "Nothing selected!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnApplyJoin.setBounds(10, 470, 285, 34);
 		panel.add(btnApplyJoin);
 
@@ -340,7 +430,7 @@ public class MainNewInterface extends JFrame
 		contentPane.add(btnDeleteCurrent);
 	}
 
-	protected void resetForm()
+	private void resetForm()
 	{
 		txtConfigName.setText("");
 		txtInputFolderPath.setText("");
@@ -353,4 +443,75 @@ public class MainNewInterface extends JFrame
 
 		checkAutoJoin.setSelected(false);
 	}
+
+	private class OnChangeTextArea implements DocumentListener
+	{
+
+		public void changedUpdate(DocumentEvent arg0)
+		{
+			generatePreview();
+		}
+
+		public void insertUpdate(DocumentEvent arg0)
+		{
+			generatePreview();
+		}
+
+		public void removeUpdate(DocumentEvent arg0)
+		{
+			generatePreview();
+		}
+	}
+
+	class MyWindowListener implements WindowListener
+	{
+		@Override
+		public void windowActivated(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowClosed(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowClosing(WindowEvent arg0)
+		{
+			saveToFile();
+		}
+
+		@Override
+		public void windowDeactivated(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowDeiconified(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowIconified(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowOpened(WindowEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+	}
+
 }
