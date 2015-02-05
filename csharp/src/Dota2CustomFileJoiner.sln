@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dota2CustomFileJoiner", "Dota2CustomFileJoiner\Dota2CustomFileJoiner.csproj", "{7BF60863-83B8-4950-96A6-527D1BEC2191}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://xavierchn.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Dota2CustomFileJoiner\\Dota2CustomFileJoiner.csproj
+		SccProjectName1 = Dota2CustomFileJoiner
+		SccLocalPath1 = Dota2CustomFileJoiner
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BF60863-83B8-4950-96A6-527D1BEC2191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF60863-83B8-4950-96A6-527D1BEC2191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF60863-83B8-4950-96A6-527D1BEC2191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF60863-83B8-4950-96A6-527D1BEC2191}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
