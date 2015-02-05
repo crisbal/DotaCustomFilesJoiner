@@ -177,7 +177,7 @@ namespace Dota2CustomFileJoiner
                 _console.AppendText("\nBegin to add block from file " + f.Substring(f.LastIndexOf("\\") + 1));
                 
                 // copy every line
-                for (int i = 1; i < kvData.Length; i++)
+                for (int i = 0; i < kvData.Length; i++)
                     block.Add(kvData[i]);
                 
                 // comment lines       
