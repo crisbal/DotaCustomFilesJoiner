@@ -21,7 +21,6 @@ E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dot
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dota2CustomFileJoiner.pdb
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\bin\Debug\Dota2CustomFileJoiner.exe
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\bin\Debug\Dota2CustomFileJoiner.pdb
-E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dota2CustomFileJoiner.csprojResolveAssemblyReference.cache
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dota2CustomFileJoiner.MainForm.resources
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dota2CustomFileJoiner.Properties.Resources.resources
 E:\ZJL\code\DotaCustomFilesJoiner\csharp\src\Dota2CustomFileJoiner\obj\Debug\Dota2CustomFileJoiner.csproj.GenerateResource.Cache
